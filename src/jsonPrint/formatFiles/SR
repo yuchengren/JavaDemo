@@ -1,0 +1,765 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import entity.AreaPrintFormat;
+import entity.DividerPrintFormat;
+import entity.PrintFormat;
+import entity.RowPrintFormat;
+import entity.TextPrintFormat;
+import util.GsonUtil;
+import util.PrintAreaCode;
+import util.PrintDividerCode;
+import util.PrintTextCode;
+
+public class Main {
+
+	public static void main(String[] args) {
+		PrintFormat print = new PrintFormat();
+		List<AreaPrintFormat> areaList = new ArrayList<>();
+		DividerPrintFormat dividerFormat = new DividerPrintFormat();
+		print.setPrintAreaList(areaList);
+		print.setDividerFormat(dividerFormat);
+		print.setBottomSpacingLineNum(3);
+		print.setIs2DBarcodeConcatBillId(false);
+
+		dividerFormat.setCode(PrintDividerCode.MINUS);
+		dividerFormat.setSign('-');
+		dividerFormat.setWidthMultiple(1);
+		dividerFormat.setHeightMultiple(1);
+		dividerFormat.setColor(0x000000);
+		dividerFormat.setTopSpacingLineNum(0);
+		dividerFormat.setLeftSpacingStep(0);
+		dividerFormat.setRightSpacingStep(0);
+		dividerFormat.setRowSpacingStep(0);
+
+		/**********************title*****************************/
+		AreaPrintFormat titleAreaPrintFormat = new AreaPrintFormat();
+		areaList.add(titleAreaPrintFormat);
+		List<RowPrintFormat> titleRowList = new ArrayList<>();
+		titleAreaPrintFormat.setRowPrintFormatList(titleRowList);
+		titleAreaPrintFormat.setCode(PrintAreaCode.TITLE_AREA);
+		titleAreaPrintFormat.setOrder(0);
+		titleAreaPrintFormat.setDividerFormat(null);
+		titleAreaPrintFormat.setTopSpacingLineNum(0);
+		titleAreaPrintFormat.setTopHasDivider(false);
+
+		RowPrintFormat firstTitleRow = new RowPrintFormat();
+		titleRowList.add(firstTitleRow);
+		List<TextPrintFormat> firstTitleRowTextList = new ArrayList<>();
+		firstTitleRow.setTextPrintFormatList(firstTitleRowTextList);
+		firstTitleRow.setGravity("center");
+		firstTitleRow.setRowSpacingStep(0);
+		firstTitleRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat firstTitleRowFirstText = new TextPrintFormat();
+		firstTitleRowTextList.add(firstTitleRowFirstText);
+		firstTitleRowFirstText.setCode("");
+		firstTitleRowFirstText.setText("DR PLANT");
+		firstTitleRowFirstText.setColor(0x000000);
+		firstTitleRowFirstText.setWidthMultiple(2);
+		firstTitleRowFirstText.setHeightMultiple(2);
+		firstTitleRowFirstText.setLeftSpacingStep(0);
+		firstTitleRowFirstText.setRightSpacingStep(0);
+		firstTitleRowFirstText.setOwnWidthStep(0);
+		firstTitleRowFirstText.setGravity("center");
+
+		RowPrintFormat secondTitleRow = new RowPrintFormat();
+		titleRowList.add(secondTitleRow);
+		List<TextPrintFormat> secondTitleRowTextList = new ArrayList<>();
+		secondTitleRow.setTextPrintFormatList(secondTitleRowTextList);
+		secondTitleRow.setGravity("center");
+		secondTitleRow.setRowSpacingStep(0);
+		secondTitleRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat secondTitleRowFirstText = new TextPrintFormat();
+		secondTitleRowTextList.add(secondTitleRowFirstText);
+		secondTitleRowFirstText.setCode("");
+		secondTitleRowFirstText.setText("-----退货-----");
+		secondTitleRowFirstText.setColor(0x000000);
+		secondTitleRowFirstText.setWidthMultiple(2);
+		secondTitleRowFirstText.setHeightMultiple(2);
+		secondTitleRowFirstText.setLeftSpacingStep(0);
+		secondTitleRowFirstText.setRightSpacingStep(0);
+		secondTitleRowFirstText.setOwnWidthStep(0);
+		secondTitleRowFirstText.setGravity("center");
+
+
+		/**********************saleInfo*****************************/
+		AreaPrintFormat saleInfoArea = new AreaPrintFormat();
+		areaList.add(saleInfoArea);
+		List<RowPrintFormat> saleInfoRowList = new ArrayList<>();
+		saleInfoArea.setRowPrintFormatList(saleInfoRowList);
+		saleInfoArea.setCode(PrintAreaCode.SALE_INFO_AREA);
+		saleInfoArea.setOrder(1);
+		saleInfoArea.setTopHasDivider(false);
+		saleInfoArea.setTopSpacingLineNum(1);
+		saleInfoArea.setDividerFormat(dividerFormat);
+
+
+		RowPrintFormat firstSaleInfoRow = new RowPrintFormat();
+		saleInfoRowList.add(firstSaleInfoRow);
+		List<TextPrintFormat> firstSaleInfoRowList = new ArrayList<>();
+		firstSaleInfoRow.setTextPrintFormatList(firstSaleInfoRowList);
+		firstSaleInfoRow.setGravity("left");
+		firstSaleInfoRow.setRowSpacingStep(0);
+		firstSaleInfoRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat firstSaleInfoRowFirstText = new TextPrintFormat();
+		firstSaleInfoRowList.add(firstSaleInfoRowFirstText);
+		firstSaleInfoRowFirstText.setCode(PrintTextCode.COUNTER_CODE_NAME_KEY);
+		firstSaleInfoRowFirstText.setText("店号+店名:");
+		firstSaleInfoRowFirstText.setHeightMultiple(1);
+		firstSaleInfoRowFirstText.setWidthMultiple(1);
+		firstSaleInfoRowFirstText.setColor(0x073190);
+		firstSaleInfoRowFirstText.setLeftSpacingStep(0);
+		firstSaleInfoRowFirstText.setRightSpacingStep(12);
+		firstSaleInfoRowFirstText.setOwnWidthStep(0);
+		firstSaleInfoRowFirstText.setGravity("left");
+
+		TextPrintFormat firstSaleInfoRowSecondText = new TextPrintFormat();
+		firstSaleInfoRowList.add(firstSaleInfoRowSecondText);
+		firstSaleInfoRowSecondText.setCode(PrintTextCode.COUNTER_CODE_NAME_VALUE);
+		firstSaleInfoRowSecondText.setText("");
+		firstSaleInfoRowSecondText.setHeightMultiple(1);
+		firstSaleInfoRowSecondText.setWidthMultiple(1);
+		firstSaleInfoRowSecondText.setColor(0x414351);
+		firstSaleInfoRowSecondText.setLeftSpacingStep(0);
+		firstSaleInfoRowSecondText.setRightSpacingStep(0);
+		firstSaleInfoRowSecondText.setOwnWidthStep(0);
+		firstSaleInfoRowSecondText.setGravity("left");
+
+
+		RowPrintFormat secondSaleInfoRow = new RowPrintFormat();
+		saleInfoRowList.add(secondSaleInfoRow);
+		List<TextPrintFormat> secondSaleInfoRowList = new ArrayList<>();
+		secondSaleInfoRow.setTextPrintFormatList(secondSaleInfoRowList);
+		secondSaleInfoRow.setGravity("left");
+		secondSaleInfoRow.setRowSpacingStep(0);
+		secondSaleInfoRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat secondSaleInfoRowFirstText = new TextPrintFormat();
+		secondSaleInfoRowList.add(secondSaleInfoRowFirstText);
+		secondSaleInfoRowFirstText.setCode(PrintTextCode.COUNTER_ADDRESS_KEY);
+		secondSaleInfoRowFirstText.setText("门店地址:");
+		secondSaleInfoRowFirstText.setHeightMultiple(1);
+		secondSaleInfoRowFirstText.setWidthMultiple(1);
+		secondSaleInfoRowFirstText.setColor(0x073190);
+		secondSaleInfoRowFirstText.setLeftSpacingStep(0);
+		secondSaleInfoRowFirstText.setRightSpacingStep(12);
+		secondSaleInfoRowFirstText.setOwnWidthStep(0);
+		secondSaleInfoRowFirstText.setGravity("left");
+
+		TextPrintFormat secondSaleInfoRowSecondText = new TextPrintFormat();
+		secondSaleInfoRowList.add(secondSaleInfoRowSecondText);
+		secondSaleInfoRowSecondText.setCode(PrintTextCode.COUNTER_ADDRESS_VALUE);
+		secondSaleInfoRowSecondText.setText("");
+		secondSaleInfoRowSecondText.setHeightMultiple(1);
+		secondSaleInfoRowSecondText.setWidthMultiple(1);
+		secondSaleInfoRowSecondText.setColor(0x414351);
+		secondSaleInfoRowSecondText.setLeftSpacingStep(0);
+		secondSaleInfoRowSecondText.setRightSpacingStep(0);
+		secondSaleInfoRowSecondText.setOwnWidthStep(0);
+		secondSaleInfoRowSecondText.setGravity("left");
+
+		RowPrintFormat counterTelephoneRow = new RowPrintFormat();
+		saleInfoRowList.add(counterTelephoneRow);
+		List<TextPrintFormat> counterTelephoneRowList = new ArrayList<>();
+		counterTelephoneRow.setTextPrintFormatList(counterTelephoneRowList);
+		counterTelephoneRow.setGravity("left");
+		counterTelephoneRow.setRowSpacingStep(0);
+		counterTelephoneRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat counterTelephoneRowFirstText = new TextPrintFormat();
+		counterTelephoneRowList.add(counterTelephoneRowFirstText);
+		counterTelephoneRowFirstText.setCode(PrintTextCode.COUNTER_TELEPHONE_KEY);
+		counterTelephoneRowFirstText.setText("柜台电话:");
+		counterTelephoneRowFirstText.setHeightMultiple(1);
+		counterTelephoneRowFirstText.setWidthMultiple(1);
+		counterTelephoneRowFirstText.setColor(0x073190);
+		counterTelephoneRowFirstText.setLeftSpacingStep(0);
+		counterTelephoneRowFirstText.setRightSpacingStep(12);
+		counterTelephoneRowFirstText.setOwnWidthStep(0);
+		counterTelephoneRowFirstText.setGravity("left");
+
+		TextPrintFormat counterTelephoneRowSecondText = new TextPrintFormat();
+		counterTelephoneRowList.add(counterTelephoneRowSecondText);
+		counterTelephoneRowSecondText.setCode(PrintTextCode.COUNTER_TELEPHONE_VALUE);
+		counterTelephoneRowSecondText.setText("");
+		counterTelephoneRowSecondText.setHeightMultiple(1);
+		counterTelephoneRowSecondText.setWidthMultiple(1);
+		counterTelephoneRowSecondText.setColor(0x414351);
+		counterTelephoneRowSecondText.setLeftSpacingStep(0);
+		counterTelephoneRowSecondText.setRightSpacingStep(0);
+		counterTelephoneRowSecondText.setOwnWidthStep(0);
+		counterTelephoneRowSecondText.setGravity("left");
+
+
+		RowPrintFormat thirdSaleInfoRow = new RowPrintFormat();
+		saleInfoRowList.add(thirdSaleInfoRow);
+		List<TextPrintFormat> thirdSaleInfoRowList = new ArrayList<>();
+		thirdSaleInfoRow.setTextPrintFormatList(thirdSaleInfoRowList);
+		thirdSaleInfoRow.setGravity("left");
+		thirdSaleInfoRow.setRowSpacingStep(0);
+		thirdSaleInfoRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat thirdSaleInfoRowFirstText = new TextPrintFormat();
+		thirdSaleInfoRowList.add(thirdSaleInfoRowFirstText);
+		thirdSaleInfoRowFirstText.setCode(PrintTextCode.EMPLOYEE_NAME_KEY);
+		thirdSaleInfoRowFirstText.setText("BA:");
+		thirdSaleInfoRowFirstText.setHeightMultiple(1);
+		thirdSaleInfoRowFirstText.setWidthMultiple(1);
+		thirdSaleInfoRowFirstText.setColor(0x073190);
+		thirdSaleInfoRowFirstText.setLeftSpacingStep(0);
+		thirdSaleInfoRowFirstText.setRightSpacingStep(12);
+		thirdSaleInfoRowFirstText.setOwnWidthStep(0);
+		thirdSaleInfoRowFirstText.setGravity("left");
+
+		TextPrintFormat thirdSaleInfoRowSecondText = new TextPrintFormat();
+		thirdSaleInfoRowList.add(thirdSaleInfoRowSecondText);
+		thirdSaleInfoRowSecondText.setCode(PrintTextCode.EMPLOYEE_NAME_VALUE);
+		thirdSaleInfoRowSecondText.setText("");
+		thirdSaleInfoRowSecondText.setHeightMultiple(1);
+		thirdSaleInfoRowSecondText.setWidthMultiple(1);
+		thirdSaleInfoRowSecondText.setColor(0x414351);
+		thirdSaleInfoRowSecondText.setLeftSpacingStep(0);
+		thirdSaleInfoRowSecondText.setRightSpacingStep(48);
+		thirdSaleInfoRowSecondText.setOwnWidthStep(0);
+		thirdSaleInfoRowSecondText.setGravity("left");
+
+		TextPrintFormat thirdSaleInfoRowThirdText = new TextPrintFormat();
+		thirdSaleInfoRowList.add(thirdSaleInfoRowThirdText);
+		thirdSaleInfoRowThirdText.setCode(PrintTextCode.SALE_TIME_KEY);
+		thirdSaleInfoRowThirdText.setText("业务日期:");
+		thirdSaleInfoRowThirdText.setHeightMultiple(1);
+		thirdSaleInfoRowThirdText.setWidthMultiple(1);
+		thirdSaleInfoRowThirdText.setColor(0x073190);
+		thirdSaleInfoRowThirdText.setLeftSpacingStep(0);
+		thirdSaleInfoRowThirdText.setRightSpacingStep(12);
+		thirdSaleInfoRowThirdText.setOwnWidthStep(0);
+		thirdSaleInfoRowThirdText.setGravity("left");
+
+		TextPrintFormat thirdSaleInfoRowFourthText = new TextPrintFormat();
+		thirdSaleInfoRowList.add(thirdSaleInfoRowFourthText);
+		thirdSaleInfoRowFourthText.setCode(PrintTextCode.SALE_TIME_VALUE);
+		thirdSaleInfoRowFourthText.setText("");
+		thirdSaleInfoRowFourthText.setWidthMultiple(1);
+		thirdSaleInfoRowFourthText.setHeightMultiple(1);
+		thirdSaleInfoRowFourthText.setColor(0x414351);
+		thirdSaleInfoRowFourthText.setLeftSpacingStep(0);
+		thirdSaleInfoRowFourthText.setRightSpacingStep(0);
+		thirdSaleInfoRowFourthText.setOwnWidthStep(0);
+		thirdSaleInfoRowFourthText.setGravity("left");
+
+
+		RowPrintFormat fourthSaleInfoRow = new RowPrintFormat();
+		saleInfoRowList.add(fourthSaleInfoRow);
+		List<TextPrintFormat> fourthSaleInfoRowList = new ArrayList<>();
+		fourthSaleInfoRow.setTextPrintFormatList(fourthSaleInfoRowList);
+		fourthSaleInfoRow.setGravity("left");
+		fourthSaleInfoRow.setRowSpacingStep(0);
+		fourthSaleInfoRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat fourthSaleInfoRowFirstText = new TextPrintFormat();
+		fourthSaleInfoRowList.add(fourthSaleInfoRowFirstText);
+		fourthSaleInfoRowFirstText.setCode(PrintTextCode.MEMBER_CODE_KEY);
+		fourthSaleInfoRowFirstText.setText("会员号:");
+		fourthSaleInfoRowFirstText.setHeightMultiple(1);
+		fourthSaleInfoRowFirstText.setWidthMultiple(1);
+		fourthSaleInfoRowFirstText.setColor(0x073190);
+		fourthSaleInfoRowFirstText.setLeftSpacingStep(0);
+		fourthSaleInfoRowFirstText.setRightSpacingStep(12);
+		fourthSaleInfoRowFirstText.setOwnWidthStep(0);
+		fourthSaleInfoRowFirstText.setGravity("left");
+
+		TextPrintFormat fourthSaleInfoRowSecondText = new TextPrintFormat();
+		fourthSaleInfoRowList.add(fourthSaleInfoRowSecondText);
+		fourthSaleInfoRowSecondText.setCode(PrintTextCode.MEMBER_CODE_VALUE);
+		fourthSaleInfoRowSecondText.setText("");
+		fourthSaleInfoRowSecondText.setHeightMultiple(1);
+		fourthSaleInfoRowSecondText.setWidthMultiple(1);
+		fourthSaleInfoRowSecondText.setColor(0x414351);
+		fourthSaleInfoRowSecondText.setLeftSpacingStep(0);
+		fourthSaleInfoRowSecondText.setRightSpacingStep(0);
+		fourthSaleInfoRowSecondText.setOwnWidthStep(0);
+		fourthSaleInfoRowSecondText.setGravity("left");
+
+
+		/**********************商品列表title*****************************/
+		AreaPrintFormat productTitleArea = new AreaPrintFormat();
+		areaList.add(productTitleArea);
+		List<RowPrintFormat> productTitleRowList = new ArrayList<>();
+		productTitleArea.setRowPrintFormatList(productTitleRowList);
+		productTitleArea.setCode(PrintAreaCode.PRODUCT_TITLE_AREA);
+		productTitleArea.setOrder(2);
+		productTitleArea.setTopSpacingLineNum(0);
+		productTitleArea.setTopHasDivider(true);
+		productTitleArea.setDividerFormat(null);
+
+
+		RowPrintFormat firstProductTitleRow = new RowPrintFormat();
+		productTitleRowList.add(firstProductTitleRow);
+		List<TextPrintFormat> firstProductTitleRowTextList = new ArrayList<>();
+		firstProductTitleRow.setTextPrintFormatList(firstProductTitleRowTextList);
+		firstProductTitleRow.setGravity("left");
+		firstProductTitleRow.setRowSpacingStep(0);
+		firstProductTitleRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat firstProductTitleRowFirstText = new TextPrintFormat();
+		firstProductTitleRowTextList.add(firstProductTitleRowFirstText);
+		firstProductTitleRowFirstText.setCode(PrintTextCode.PRODUCT_NAME_KEY);
+		firstProductTitleRowFirstText.setText("产品名称/商品编码");
+		firstProductTitleRowFirstText.setWidthMultiple(1);
+		firstProductTitleRowFirstText.setHeightMultiple(1);
+		firstProductTitleRowFirstText.setColor(0x000000);
+		firstProductTitleRowFirstText.setLeftSpacingStep(0);
+		firstProductTitleRowFirstText.setRightSpacingStep(12);
+		firstProductTitleRowFirstText.setOwnWidthStep(12*18);
+		firstProductTitleRowFirstText.setGravity("left");
+
+		TextPrintFormat firstProductTitleRowSecondText = new TextPrintFormat();
+		firstProductTitleRowTextList.add(firstProductTitleRowSecondText);
+		firstProductTitleRowSecondText.setCode(PrintTextCode.PRODUCT_QUANTITY_KEY);
+		firstProductTitleRowSecondText.setText("数量");
+		firstProductTitleRowSecondText.setWidthMultiple(1);
+		firstProductTitleRowSecondText.setHeightMultiple(1);
+		firstProductTitleRowSecondText.setColor(0x000000);
+		firstProductTitleRowSecondText.setLeftSpacingStep(0);
+		firstProductTitleRowSecondText.setRightSpacingStep(12);
+		firstProductTitleRowSecondText.setOwnWidthStep(12*6);
+		firstProductTitleRowSecondText.setGravity("center");
+
+		TextPrintFormat firstProductTitleRowThirdText = new TextPrintFormat();
+		firstProductTitleRowTextList.add(firstProductTitleRowThirdText);
+		firstProductTitleRowThirdText.setCode(PrintTextCode.PRODUCT_PRICE_KEY);
+		firstProductTitleRowThirdText.setText("零售价");
+		firstProductTitleRowThirdText.setWidthMultiple(1);
+		firstProductTitleRowThirdText.setHeightMultiple(1);
+		firstProductTitleRowThirdText.setColor(0x000000);
+		firstProductTitleRowThirdText.setLeftSpacingStep(0);
+		firstProductTitleRowThirdText.setRightSpacingStep(12);
+		firstProductTitleRowThirdText.setOwnWidthStep(12*10);
+		firstProductTitleRowThirdText.setGravity("right");
+
+		TextPrintFormat firstProductTitleRowFourthText = new TextPrintFormat();
+		firstProductTitleRowTextList.add(firstProductTitleRowFourthText);
+		firstProductTitleRowFourthText.setCode(PrintTextCode.PRODUCT_MONEY_KEY);
+		firstProductTitleRowFourthText.setText("金额");
+		firstProductTitleRowFourthText.setWidthMultiple(1);
+		firstProductTitleRowFourthText.setHeightMultiple(1);
+		firstProductTitleRowFourthText.setColor(0x000000);
+		firstProductTitleRowFourthText.setLeftSpacingStep(0);
+		firstProductTitleRowFourthText.setRightSpacingStep(0);
+		firstProductTitleRowFourthText.setOwnWidthStep(12*10);
+		firstProductTitleRowFourthText.setGravity("right");
+
+		/**********************商品列表item*****************************/
+		AreaPrintFormat productItemArea = new AreaPrintFormat();
+		areaList.add(productItemArea);
+		List<RowPrintFormat> productItemRowList = new ArrayList<>();
+		productItemArea.setRowPrintFormatList(productItemRowList);
+		productItemArea.setCode(PrintAreaCode.PRODUCT_ITEM_AREA);
+		productItemArea.setOrder(3);
+		productItemArea.setDividerFormat(null);
+		productItemArea.setTopHasDivider(false);
+		productItemArea.setTopSpacingLineNum(0);
+
+		RowPrintFormat productItemFirstRow = new RowPrintFormat();
+		List<TextPrintFormat> productItemFirstRowTextList = new ArrayList<>();
+		productItemRowList.add(productItemFirstRow);
+		productItemFirstRow.setTextPrintFormatList(productItemFirstRowTextList);
+		productItemFirstRow.setRowSpacingStep(0);
+		productItemFirstRow.setTopSpacingLineNum(0);
+		productItemFirstRow.setGravity("left");
+
+		TextPrintFormat productItemFirstRowFirstText = new TextPrintFormat();
+		productItemFirstRowTextList.add(productItemFirstRowFirstText);
+		productItemFirstRowFirstText.setCode(PrintTextCode.PRODUCT_NAME_VALUE);
+		productItemFirstRowFirstText.setText("");
+		productItemFirstRowFirstText.setColor(0xFF00FF);
+		productItemFirstRowFirstText.setGravity("left");
+		productItemFirstRowFirstText.setOwnWidthStep(0);
+		productItemFirstRowFirstText.setLeftSpacingStep(0);
+		productItemFirstRowFirstText.setRightSpacingStep(0);
+		productItemFirstRowFirstText.setHeightMultiple(1);
+		productItemFirstRowFirstText.setWidthMultiple(1);
+
+		RowPrintFormat productItemSecondRow = new RowPrintFormat();
+		productItemRowList.add(productItemSecondRow);
+		List<TextPrintFormat> productItemSecondRowTextList = new ArrayList<>();
+		productItemSecondRow.setTextPrintFormatList(productItemSecondRowTextList);
+		productItemSecondRow.setGravity("left");
+		productItemSecondRow.setTopSpacingLineNum(0);
+		productItemSecondRow.setRowSpacingStep(0);
+
+
+		TextPrintFormat productItemSecondRowFirstText = new TextPrintFormat();
+		productItemSecondRowTextList.add(productItemSecondRowFirstText);
+		productItemSecondRowFirstText.setText("");
+		productItemSecondRowFirstText.setWidthMultiple(1);
+		productItemSecondRowFirstText.setHeightMultiple(1);
+		productItemSecondRowFirstText.setColor(0xc099cc);
+		productItemSecondRowFirstText.setCode(PrintTextCode.PRODUCT_BARCODE_VALUE);
+		productItemSecondRowFirstText.setLeftSpacingStep(0);
+		productItemSecondRowFirstText.setRightSpacingStep(12);
+		productItemSecondRowFirstText.setOwnWidthStep(12*18);
+		productItemSecondRowFirstText.setGravity("left");
+
+		TextPrintFormat productItemSecondRowSecondText = new TextPrintFormat();
+		productItemSecondRowTextList.add(productItemSecondRowSecondText);
+		productItemSecondRowSecondText.setText("");
+		productItemSecondRowSecondText.setWidthMultiple(1);
+		productItemSecondRowSecondText.setHeightMultiple(1);
+		productItemSecondRowSecondText.setColor(0xc099cc);
+		productItemSecondRowSecondText.setCode(PrintTextCode.PRODUCT_QUANTITY_VALUE);
+		productItemSecondRowSecondText.setLeftSpacingStep(0);
+		productItemSecondRowSecondText.setRightSpacingStep(12);
+		productItemSecondRowSecondText.setOwnWidthStep(12 * 6);
+		productItemSecondRowSecondText.setGravity("center");
+
+		TextPrintFormat productItemSecondRowThirdText = new TextPrintFormat();
+		productItemSecondRowTextList.add(productItemSecondRowThirdText);
+		productItemSecondRowThirdText.setText("");
+		productItemSecondRowThirdText.setWidthMultiple(1);
+		productItemSecondRowThirdText.setHeightMultiple(1);
+		productItemSecondRowThirdText.setColor(0xc099cc);
+		productItemSecondRowThirdText.setCode(PrintTextCode.PRODUCT_PRICE_VALUE);
+		productItemSecondRowThirdText.setLeftSpacingStep(0);
+		productItemSecondRowThirdText.setRightSpacingStep(12);
+		productItemSecondRowThirdText.setOwnWidthStep(12*10);
+		productItemSecondRowThirdText.setGravity("right");
+
+		TextPrintFormat productItemSecondRowFourthText = new TextPrintFormat();
+		productItemSecondRowTextList.add(productItemSecondRowFourthText);
+		productItemSecondRowFourthText.setText("");
+		productItemSecondRowFourthText.setWidthMultiple(1);
+		productItemSecondRowFourthText.setHeightMultiple(1);
+		productItemSecondRowFourthText.setColor(0xc099cc);
+		productItemSecondRowFourthText.setCode(PrintTextCode.PRODUCT_MONEY_VALUE);
+		productItemSecondRowFourthText.setLeftSpacingStep(0);
+		productItemSecondRowFourthText.setRightSpacingStep(0);
+		productItemSecondRowFourthText.setOwnWidthStep(12*10);
+		productItemSecondRowFourthText.setGravity("right");
+
+		RowPrintFormat productItemThirdRow = new RowPrintFormat();
+		productItemRowList.add(productItemThirdRow);
+		List<TextPrintFormat> productItemThirdRowTextList = new ArrayList<>();
+		productItemThirdRow.setTextPrintFormatList(productItemThirdRowTextList);
+		productItemThirdRow.setGravity("left");
+		productItemThirdRow.setTopSpacingLineNum(0);
+		productItemThirdRow.setRowSpacingStep(0);
+
+
+		TextPrintFormat productItemThirdRowFirstText = new TextPrintFormat();
+		productItemThirdRowTextList.add(productItemThirdRowFirstText);
+		productItemThirdRowFirstText.setText("唯一码:");
+		productItemThirdRowFirstText.setWidthMultiple(1);
+		productItemThirdRowFirstText.setHeightMultiple(1);
+		productItemThirdRowFirstText.setColor(0xc099cc);
+		productItemThirdRowFirstText.setCode(PrintTextCode.PRODUCT_UNIQUE_CODE_KEY);
+		productItemThirdRowFirstText.setLeftSpacingStep(0);
+		productItemThirdRowFirstText.setRightSpacingStep(12);
+		productItemThirdRowFirstText.setOwnWidthStep(0);
+		productItemThirdRowFirstText.setGravity("left");
+
+		TextPrintFormat productItemThirdRowSecondText = new TextPrintFormat();
+		productItemThirdRowTextList.add(productItemThirdRowSecondText);
+		productItemThirdRowSecondText.setText("");
+		productItemThirdRowSecondText.setWidthMultiple(1);
+		productItemThirdRowSecondText.setHeightMultiple(1);
+		productItemThirdRowSecondText.setColor(0xc099cc);
+		productItemThirdRowSecondText.setCode(PrintTextCode.PRODUCT_UNIQUE_CODE_VALUE);
+		productItemThirdRowSecondText.setLeftSpacingStep(0);
+		productItemThirdRowSecondText.setRightSpacingStep(0);
+		productItemThirdRowSecondText.setOwnWidthStep(0);
+		productItemThirdRowSecondText.setGravity("left");
+
+		/**********************商品合计*****************************/
+		AreaPrintFormat totalInfoArea = new AreaPrintFormat();
+		areaList.add(totalInfoArea);
+		List<RowPrintFormat> totalInfoRowList = new ArrayList<>();
+		totalInfoArea.setRowPrintFormatList(totalInfoRowList);
+		totalInfoArea.setCode(PrintAreaCode.TOTAL_INFO_AREA);
+		totalInfoArea.setOrder(4);
+		totalInfoArea.setTopSpacingLineNum(1);
+		totalInfoArea.setTopHasDivider(false);
+		totalInfoArea.setDividerFormat(null);
+
+		RowPrintFormat totalInfoFirstRow = new RowPrintFormat();
+		totalInfoRowList.add(totalInfoFirstRow);
+		List<TextPrintFormat> totalInfoFirstRowTextList = new ArrayList<>();
+		totalInfoFirstRow.setTextPrintFormatList(totalInfoFirstRowTextList);
+		totalInfoFirstRow.setGravity("left");
+		totalInfoFirstRow.setRowSpacingStep(0);
+		totalInfoFirstRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat totalInfoFirstRowFirstText = new TextPrintFormat();
+		totalInfoFirstRowTextList.add(totalInfoFirstRowFirstText);
+		totalInfoFirstRowFirstText.setCode(PrintTextCode.TOTAL_AMOUNT_KEY);
+		totalInfoFirstRowFirstText.setColor(0x000000);
+		totalInfoFirstRowFirstText.setOwnWidthStep(12 * 32);
+		totalInfoFirstRowFirstText.setGravity("left");
+		totalInfoFirstRowFirstText.setLeftSpacingStep(48);
+		totalInfoFirstRowFirstText.setRightSpacingStep(12);
+		totalInfoFirstRowFirstText.setHeightMultiple(1);
+		totalInfoFirstRowFirstText.setWidthMultiple(1);
+		totalInfoFirstRowFirstText.setText("金额合计（元）:");
+
+		TextPrintFormat totalInfoFirstRowSecondText = new TextPrintFormat();
+		totalInfoFirstRowTextList.add(totalInfoFirstRowSecondText);
+		totalInfoFirstRowSecondText.setCode(PrintTextCode.TOTAL_AMOUNT_VALUE);
+		totalInfoFirstRowSecondText.setText("");
+		totalInfoFirstRowSecondText.setColor(0x000000);
+		totalInfoFirstRowSecondText.setOwnWidthStep(12 * 10);
+		totalInfoFirstRowSecondText.setGravity("right");
+		totalInfoFirstRowSecondText.setLeftSpacingStep(0);
+		totalInfoFirstRowSecondText.setRightSpacingStep(0);
+		totalInfoFirstRowSecondText.setHeightMultiple(1);
+		totalInfoFirstRowSecondText.setWidthMultiple(1);
+
+
+		RowPrintFormat totalInfoSecondRow = new RowPrintFormat();
+		totalInfoRowList.add(totalInfoSecondRow);
+		List<TextPrintFormat> totalInfoSecondRowTextList = new ArrayList<>();
+		totalInfoSecondRow.setTextPrintFormatList(totalInfoSecondRowTextList);
+		totalInfoSecondRow.setGravity("left");
+		totalInfoSecondRow.setRowSpacingStep(0);
+		totalInfoSecondRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat totalInfoSecondRowFirstText = new TextPrintFormat();
+		totalInfoSecondRowTextList.add(totalInfoSecondRowFirstText);
+		totalInfoSecondRowFirstText.setCode(PrintTextCode.TOTAL_DISCOUNT_MONEY_KEY);
+		totalInfoSecondRowFirstText.setColor(0x000000);
+		totalInfoSecondRowFirstText.setText("折扣（元）:");
+		totalInfoSecondRowFirstText.setHeightMultiple(1);
+		totalInfoSecondRowFirstText.setWidthMultiple(1);
+		totalInfoSecondRowFirstText.setLeftSpacingStep(48);
+		totalInfoSecondRowFirstText.setRightSpacingStep(12);
+		totalInfoSecondRowFirstText.setOwnWidthStep(12 * 32);
+		totalInfoSecondRowFirstText.setGravity("left");
+
+		TextPrintFormat totalInfoSecondRowSecondText = new TextPrintFormat();
+		totalInfoSecondRowTextList.add(totalInfoSecondRowSecondText);
+		totalInfoSecondRowSecondText.setCode(PrintTextCode.TOTAL_DISCOUNT_MONEY_VALUE);
+		totalInfoSecondRowSecondText.setText("");
+		totalInfoSecondRowSecondText.setColor(0x000000);
+		totalInfoSecondRowSecondText.setHeightMultiple(1);
+		totalInfoSecondRowSecondText.setWidthMultiple(1);
+		totalInfoSecondRowSecondText.setLeftSpacingStep(0);
+		totalInfoSecondRowSecondText.setRightSpacingStep(0);
+		totalInfoSecondRowSecondText.setOwnWidthStep(12*10);
+		totalInfoSecondRowSecondText.setGravity("right");
+
+		/**********************支付方式区域*****************************/
+		AreaPrintFormat payTypeArea = new AreaPrintFormat();
+		areaList.add(payTypeArea);
+		List<RowPrintFormat> payTypeRowList = new ArrayList<>();
+		payTypeArea.setRowPrintFormatList(payTypeRowList);
+		payTypeArea.setCode(PrintAreaCode.PAY_TYPE_AREA);
+		payTypeArea.setOrder(5);
+		payTypeArea.setTopSpacingLineNum(0);
+		payTypeArea.setTopHasDivider(false);
+		payTypeArea.setDividerFormat(null);
+
+		RowPrintFormat payTypeFirstRow = new RowPrintFormat();
+		payTypeRowList.add(payTypeFirstRow);
+		List<TextPrintFormat> payTypeFirstRowTextList = new ArrayList<>();
+		payTypeFirstRow.setGravity("left");
+		payTypeFirstRow.setTextPrintFormatList(payTypeFirstRowTextList);
+		payTypeFirstRow.setRowSpacingStep(0);
+		payTypeFirstRow.setTopSpacingLineNum(0);
+
+
+		TextPrintFormat payTypeFirstRowFirstText = new TextPrintFormat();
+		payTypeFirstRowTextList.add(payTypeFirstRowFirstText);
+		payTypeFirstRowFirstText.setCode(PrintTextCode.PAY_TYPE_NAME);
+		payTypeFirstRowFirstText.setText("");
+		payTypeFirstRowFirstText.setColor(0x000000);
+		payTypeFirstRowFirstText.setHeightMultiple(1);
+		payTypeFirstRowFirstText.setWidthMultiple(1);
+		payTypeFirstRowFirstText.setLeftSpacingStep(48);
+		payTypeFirstRowFirstText.setRightSpacingStep(12);
+		payTypeFirstRowFirstText.setOwnWidthStep(12 * 32);
+		payTypeFirstRowFirstText.setGravity("left");
+
+		TextPrintFormat payTypeFirstRowSecondText = new TextPrintFormat();
+		payTypeFirstRowTextList.add(payTypeFirstRowSecondText);
+		payTypeFirstRowSecondText.setCode(PrintTextCode.PAY_TYPE_MONEY);
+		payTypeFirstRowSecondText.setText("");
+		payTypeFirstRowSecondText.setColor(0x000000);
+		payTypeFirstRowSecondText.setHeightMultiple(1);
+		payTypeFirstRowSecondText.setWidthMultiple(1);
+		payTypeFirstRowSecondText.setLeftSpacingStep(0);
+		payTypeFirstRowSecondText.setRightSpacingStep(0);
+		payTypeFirstRowSecondText.setOwnWidthStep(12*10);
+		payTypeFirstRowSecondText.setGravity("right");
+
+		/**********************会员信息区域*****************************/
+
+		/************积分规则区域**************/
+		AreaPrintFormat pointRuleArea = new AreaPrintFormat();
+		areaList.add(pointRuleArea);
+		List<RowPrintFormat> pointRuleRowList = new ArrayList<>();
+		pointRuleArea.setRowPrintFormatList(pointRuleRowList);
+		pointRuleArea.setCode(PrintAreaCode.POINT_RULE_AREA);
+		pointRuleArea.setTopSpacingLineNum(1);
+		pointRuleArea.setTopHasDivider(false);
+		pointRuleArea.setOrder(7);
+		pointRuleArea.setDividerFormat(null);
+
+
+		RowPrintFormat pointRuleFirstRow = new RowPrintFormat();
+		pointRuleRowList.add(pointRuleFirstRow);
+		List<TextPrintFormat> pointRuleFirstRowTextList = new ArrayList<>();
+		pointRuleFirstRow.setTextPrintFormatList(pointRuleFirstRowTextList);
+		pointRuleFirstRow.setGravity("left");
+		pointRuleFirstRow.setRowSpacingStep(0);
+		pointRuleFirstRow.setTopSpacingLineNum(0);
+
+		TextPrintFormat pointRuleFirstRowFirstText = new TextPrintFormat();
+		pointRuleFirstRowTextList.add(pointRuleFirstRowFirstText);
+		pointRuleFirstRowFirstText.setCode("");
+		pointRuleFirstRowFirstText.setColor(0x00000);
+		pointRuleFirstRowFirstText.setLeftSpacingStep(48);
+		pointRuleFirstRowFirstText.setRightSpacingStep(0);
+		pointRuleFirstRowFirstText.setWidthMultiple(1);
+		pointRuleFirstRowFirstText.setHeightMultiple(1);
+		pointRuleFirstRowFirstText.setGravity("left");
+		pointRuleFirstRowFirstText.setOwnWidthStep(0);
+		pointRuleFirstRowFirstText.setText("积分规则:\n    1）消费1元积1分，会员日享受双倍积分\n    2）介绍新会员可享受额外200积分/人\n    3）累计2000积分以上可以兑换产品");
+
+
+		/*************备注区域**************/
+		AreaPrintFormat commentArea = new AreaPrintFormat();
+		areaList.add(commentArea);
+		List<RowPrintFormat> commentRowList = new ArrayList<>();
+		commentArea.setRowPrintFormatList(commentRowList);
+		commentArea.setCode(PrintAreaCode.COMMENT_AREA);
+		commentArea.setDividerFormat(null);
+		commentArea.setOrder(8);
+		commentArea.setTopHasDivider(true);
+		commentArea.setTopSpacingLineNum(0);
+
+
+		RowPrintFormat commentFirstRow = new RowPrintFormat();
+		commentRowList.add(commentFirstRow);
+		List<TextPrintFormat> commentFirstRowTextList = new ArrayList<>();
+		commentFirstRow.setTextPrintFormatList(commentFirstRowTextList);
+		commentFirstRow.setTopSpacingLineNum(0);
+		commentFirstRow.setGravity("left");
+		commentFirstRow.setRowSpacingStep(0);
+
+		TextPrintFormat commentFirstRowFirstText = new TextPrintFormat();
+		commentFirstRowTextList.add(commentFirstRowFirstText);
+		commentFirstRowFirstText.setCode("");
+		commentFirstRowFirstText.setColor(0x000000);
+		commentFirstRowFirstText.setOwnWidthStep(0);
+		commentFirstRowFirstText.setGravity("left");
+		commentFirstRowFirstText.setHeightMultiple(1);
+		commentFirstRowFirstText.setWidthMultiple(1);
+		commentFirstRowFirstText.setRightSpacingStep(0);
+		commentFirstRowFirstText.setLeftSpacingStep(0);
+		commentFirstRowFirstText.setText("退换货政策:\n1）过敏:购买日起30日内，使用产品7天内，出现脸部红肿干屑、瘙痒、红疹等过敏现象且产品余量在70%以上\n" +
+				"2）质量:购买日起7天内，产品出现不正常变色或非正常沉淀物及颗粒或变味、变质现象或包装表面不平滑、字体印刷不完整或错误、泵头按压异常等且产品余量在70%以上；购买日起30天内，包装掉漆掉字且产品余量在50%以上\n" +
+				"3）购买的产品距保质期限一年以内的不予退货\n*退换货时需携带退换产品及购买凭证到原购买店铺\n*试用装/赠品/促销品/积分兑换产品不属于退换货政策范围内");
+
+
+		/*******************品牌信息区域***********************/
+		AreaPrintFormat brandInfoArea = new AreaPrintFormat();
+		areaList.add(brandInfoArea);
+		List<RowPrintFormat> brandInfoRowList = new ArrayList<>();
+		brandInfoArea.setRowPrintFormatList(brandInfoRowList);
+		brandInfoArea.setCode(PrintAreaCode.BRAND_INFO_AREA);
+		brandInfoArea.setDividerFormat(null);
+		brandInfoArea.setOrder(9);
+		brandInfoArea.setTopHasDivider(true);
+		brandInfoArea.setTopSpacingLineNum(0);
+
+
+		RowPrintFormat brandInfoFirstRow = new RowPrintFormat();
+		brandInfoRowList.add(brandInfoFirstRow);
+		List<TextPrintFormat> brandInfoFirstRowTextList = new ArrayList<>();
+		brandInfoFirstRow.setTextPrintFormatList(brandInfoFirstRowTextList);
+		brandInfoFirstRow.setRowSpacingStep(0);
+		brandInfoFirstRow.setTopSpacingLineNum(1);
+		brandInfoFirstRow.setGravity("center");
+
+		TextPrintFormat brandInfoFirstRowFirstText = new TextPrintFormat();
+		brandInfoFirstRowTextList.add(brandInfoFirstRowFirstText);
+		brandInfoFirstRowFirstText.setCode(PrintTextCode.BRAND_SLOGAN);
+		brandInfoFirstRowFirstText.setColor(0x000000);
+		brandInfoFirstRowFirstText.setHeightMultiple(1);
+		brandInfoFirstRowFirstText.setWidthMultiple(1);
+		brandInfoFirstRowFirstText.setGravity("center");
+		brandInfoFirstRowFirstText.setOwnWidthStep(0);
+		brandInfoFirstRowFirstText.setLeftSpacingStep(0);
+		brandInfoFirstRowFirstText.setRightSpacingStep(0);
+		brandInfoFirstRowFirstText.setText("高山植物  纯净美肌");
+
+
+		RowPrintFormat brandInfoSecondRow = new RowPrintFormat();
+		brandInfoRowList.add(brandInfoSecondRow);
+		List<TextPrintFormat> brandInfoSecondRowTextList = new ArrayList<>();
+		brandInfoSecondRow.setTextPrintFormatList(brandInfoSecondRowTextList);
+		brandInfoSecondRow.setRowSpacingStep(0);
+		brandInfoSecondRow.setTopSpacingLineNum(0);
+		brandInfoSecondRow.setGravity("center");
+
+		TextPrintFormat brandInfoSecondRowFirstText = new TextPrintFormat();
+		brandInfoSecondRowTextList.add(brandInfoSecondRowFirstText);
+		brandInfoSecondRowFirstText.setCode(PrintTextCode.BRAND_2D_BARCODE);
+		brandInfoSecondRowFirstText.setColor(0x000000);
+		brandInfoSecondRowFirstText.setText("http://weixin.qq.com/r/IkmqsgrE0letrU7R9xww");
+		brandInfoSecondRowFirstText.setGravity("center");
+		brandInfoSecondRowFirstText.setLeftSpacingStep(0);
+		brandInfoSecondRowFirstText.setRightSpacingStep(0);
+		brandInfoSecondRowFirstText.setHeightMultiple(5);
+		brandInfoSecondRowFirstText.setWidthMultiple(5);
+		brandInfoSecondRowFirstText.setOwnWidthStep(0);
+
+
+		RowPrintFormat brandInfoThirdRow = new RowPrintFormat();
+		brandInfoRowList.add(brandInfoThirdRow);
+		List<TextPrintFormat> brandInfoThirdRowTextList = new ArrayList<>();
+		brandInfoThirdRow.setTextPrintFormatList(brandInfoThirdRowTextList);
+		brandInfoThirdRow.setRowSpacingStep(0);
+		brandInfoThirdRow.setTopSpacingLineNum(0);
+		brandInfoThirdRow.setGravity("center");
+
+		TextPrintFormat brandInfoThirdRowFirstText = new TextPrintFormat();
+		brandInfoThirdRowTextList.add(brandInfoThirdRowFirstText);
+		brandInfoThirdRowFirstText.setCode(PrintTextCode.BRAND_OFFICE_WEBSITE);
+		brandInfoThirdRowFirstText.setColor(0x000000);
+		brandInfoThirdRowFirstText.setText("www.drplant.com.cn");
+		brandInfoThirdRowFirstText.setGravity("center");
+		brandInfoThirdRowFirstText.setLeftSpacingStep(0);
+		brandInfoThirdRowFirstText.setRightSpacingStep(0);
+		brandInfoThirdRowFirstText.setHeightMultiple(1);
+		brandInfoThirdRowFirstText.setWidthMultiple(1);
+		brandInfoThirdRowFirstText.setOwnWidthStep(0);
+
+
+		RowPrintFormat brandInfoFourthRow = new RowPrintFormat();
+		brandInfoRowList.add(brandInfoFourthRow);
+		List<TextPrintFormat> brandInfoFourthRowTextList = new ArrayList<>();
+		brandInfoFourthRow.setTextPrintFormatList(brandInfoFourthRowTextList);
+		brandInfoFourthRow.setRowSpacingStep(0);
+		brandInfoFourthRow.setTopSpacingLineNum(0);
+		brandInfoFourthRow.setGravity("center");
+
+		TextPrintFormat brandInfoFourthRowFirstText = new TextPrintFormat();
+		brandInfoFourthRowTextList.add(brandInfoFourthRowFirstText);
+		brandInfoFourthRowFirstText.setCode(PrintTextCode.BRAND_HOTLINE_TELEPHONE);
+		brandInfoFourthRowFirstText.setColor(0x000000);
+		brandInfoFourthRowFirstText.setText("400-810-5889");
+		brandInfoFourthRowFirstText.setGravity("center");
+		brandInfoFourthRowFirstText.setLeftSpacingStep(0);
+		brandInfoFourthRowFirstText.setRightSpacingStep(0);
+		brandInfoFourthRowFirstText.setHeightMultiple(1);
+		brandInfoFourthRowFirstText.setWidthMultiple(1);
+		brandInfoFourthRowFirstText.setOwnWidthStep(0);
+
+
+		//生成printFormatJson
+		System.out.println(GsonUtil.formatObjectToJson(print));
+	}
+}
